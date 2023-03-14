@@ -100,12 +100,8 @@ textRectObj = textSurfaceObj.get_rect()
 textRectObj.center = (200, 150)
 ```
 
-## 6. Rect
+- Dentro do laço principal do game, render o texto mostrar o texto, para isso utilizamos a função `blit()`.
 
 ```bash
-```
-
-## 7. Taste
-
-```bash
+DISPLAYSURF.blit(textSurfaceObj, textRectObj)
 ```
