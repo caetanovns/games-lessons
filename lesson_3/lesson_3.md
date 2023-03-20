@@ -1,6 +1,9 @@
 # Rect, Sprites e Colisão
 
-- Para iniciar vamos incluir nosso código base
+- Aula: Rect, Imagens e Sprites
+- Atividade: Encontrar sprites e outros recursos para o game
+
+Para iniciar vamos incluir nosso código base
 
 ```python
 import pygame
