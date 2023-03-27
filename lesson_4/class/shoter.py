@@ -18,7 +18,7 @@ DISPLAYSURF = pygame.display.set_mode((DISPLAY_X, DISPLAY_Y), pygame.RESIZABLE)
 
 pygame.display.set_caption('Animation')
 
-background = pygame.image.load('res/bg_blue.png')
+# background = pygame.image.load('res/bg_blue.png')
 pygame.mouse.set_visible(False)
 
 
@@ -33,8 +33,9 @@ target_group = pygame.sprite.Group()
 crosshair_group.add(crosshair)
 background_group.add(background)
 
-for i in range(20):
-    target = Target(random.randrange(0, DISPLAY_X), random.randrange(0, DISPLAY_Y))
+for i in range(1):
+    target = Target(random.randrange(0, DISPLAY_X),
+                    random.randrange(0, DISPLAY_Y))
     target_group.add(target)
 
 
