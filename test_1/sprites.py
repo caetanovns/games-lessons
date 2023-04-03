@@ -5,6 +5,7 @@ import random
 class Turtle(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
+        
         turtle_sheet = pygame.image.load('res/turtle.png')
         self.sprites = []
         for i in range(4):
@@ -15,9 +16,12 @@ class Turtle(pygame.sprite.Sprite):
         self.direction = 1
 
         self.image = self.sprites[self.index]
-        self.image = pygame.transform.scale(self.image, (48*5, 48*5))
+        
+        self.image = pygame.transform.scale(self.image, (48*3, 48*3))
         self.rect = self.image.get_rect()
+       
         self.rect.center = (512, 500)
+        
 
     def update(self):
         self.index += 0.08
@@ -26,10 +30,10 @@ class Turtle(pygame.sprite.Sprite):
         self.image = self.sprites[int(self.index)]
 
         if self.direction:
-            self.image = pygame.transform.scale(self.image, (48*5, 48*5))
+            self.image = pygame.transform.scale(self.image, (48*3, 48*3))
         else:
             self.image = pygame.transform.flip(self.image, True, False)
-            self.image = pygame.transform.scale(self.image, (48*5, 48*5))
+            self.image = pygame.transform.scale(self.image, (48*3, 48*3))
 
         self.handle_keys()
 

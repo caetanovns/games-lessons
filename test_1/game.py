@@ -41,7 +41,10 @@ while True:
     turtle_group.draw(DISPLAYSURF)
     turtle_group.update()
     
-    if len(bomb_group) < 200:
+    pygame.sprite.spritecollide(turtle, bomb_group, True)
+        
+
+    if len(bomb_group) < 10:
         bomb_group.add(Bomb(random.randint(0, 1024)))
     pygame.display.update()
     fpsClock.tick(FPS)
