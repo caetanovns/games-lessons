@@ -19,7 +19,7 @@ background = pygame.image.load('res/background.png')
 
 background = pygame.transform.scale(background, (1024, 768))
 
-turtle = Turtle()
+turtle = Turtle(DISPLAYSURF)
 
 turtle_group = pygame.sprite.Group()
 bomb_group = pygame.sprite.Group()
@@ -40,11 +40,13 @@ while True:
 
     turtle_group.draw(DISPLAYSURF)
     turtle_group.update()
-    
-    pygame.sprite.spritecollide(turtle, bomb_group, True)
-        
 
-    if len(bomb_group) < 10:
-        bomb_group.add(Bomb(random.randint(0, 1024)))
+    # pygame.sprite.spritecollide(turtle, bomb_group, True)
+    for bomb in bomb_group:
+        if (turtle.collides_with(bomb.collision_rect)):
+            bomb.kill()
+
+    if len(bomb_group) < 25:
+        bomb_group.add(Bomb(random.randint(0, 1024), DISPLAYSURF))
     pygame.display.update()
     fpsClock.tick(FPS)
