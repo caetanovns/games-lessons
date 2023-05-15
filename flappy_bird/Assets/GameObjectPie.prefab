@@ -121,7 +121,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3802215579654598721}
   - component: {fileID: 3802215579654598720}
-  - component: {fileID: -6812143789399756899}
+  - component: {fileID: 7782686296217833259}
   m_Layer: 0
   m_Name: GameObjectPie
   m_TagString: Untagged
@@ -159,7 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
---- !u!50 &-6812143789399756899
+--- !u!50 &7782686296217833259
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0

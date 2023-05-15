@@ -8,12 +8,9 @@ public class pipe : MonoBehaviour
     [SerializeField]
     private float speed = 0.01f;
 
-    private Vector3 initialPosition;
 
     private void Awake()
     {
-        this.initialPosition = this.transform.position;
-
         this.transform.Translate(Vector3.up * Random.Range(-1.5f,1.5f));
     }
 
@@ -25,7 +22,7 @@ public class pipe : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        GameObject.Destroy(this.gameObject);
+        this.destroy();
     }
 
     public void destroy()

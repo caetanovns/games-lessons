@@ -9,8 +9,6 @@ public class directorscene : MonoBehaviour
 
     private bird passaro;
 
-
-
     private void Start()
     {
         this.passaro = GameObject.FindObjectOfType<bird>();
