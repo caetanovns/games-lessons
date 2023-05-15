@@ -13,15 +13,23 @@ public class pipe : MonoBehaviour
     private void Awake()
     {
         this.initialPosition = this.transform.position;
+
+        this.transform.Translate(Vector3.up * Random.Range(-1.5f,1.5f));
     }
 
     // Update is called once per frame
     void Update()
     {
-        this.transform.Translate(Vector2.left * this.speed);
-        if (this.transform.position.x < (-11.01))
-        {
-            this.transform.position = this.initialPosition;
-        }
+        this.transform.Translate(Vector2.left * this.speed * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        GameObject.Destroy(this.gameObject);
+    }
+
+    public void destroy()
+    {
+        GameObject.Destroy(this.gameObject);
     }
 }

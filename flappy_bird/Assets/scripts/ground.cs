@@ -20,9 +20,7 @@ public class ground : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.transform.Translate(Vector2.left * this.speed);
-        
-        // Debug.Log(this.initialPosition.x - this.transform.position.x);
+        this.transform.Translate(Vector2.left * this.speed * Time.deltaTime);
         
         if (this.initialPosition.x - this.transform.position.x > this.imagesize)
         {
