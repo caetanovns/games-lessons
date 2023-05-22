@@ -12,12 +12,12 @@ public class generatepipes : MonoBehaviour
 
     [SerializeField]
     private GameObject prefab;
-       
 
     private void Awake()
     {
         this.cron = this.timeToCreate;
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -28,6 +28,5 @@ public class generatepipes : MonoBehaviour
             GameObject.Instantiate(this.prefab, this.transform.position, Quaternion.identity);
             this.cron = this.timeToCreate;
         }
-
     }
 }
