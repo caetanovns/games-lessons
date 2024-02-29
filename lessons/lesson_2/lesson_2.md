@@ -2,7 +2,7 @@
 
 Apresentar: TDE 1, Exercício 1 e 2.
 
-Este repositório será utulizado para armazenar as aulas de Jogos.
+Este repositório será utilizado para armazenar as aulas de Jogos.
 
 Assunto: Cores, Imagens, Rect
 
