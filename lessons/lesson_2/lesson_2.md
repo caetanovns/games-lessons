@@ -1,8 +1,6 @@
 # Games Lessons
 
-Apresentar: TDE 1, Exercício 1 e 2.
-
-Este repositório será utilizado para armazenar as aulas de Jogos.
+Pauta: Conteúdo, apresentação TDE 1, Exercício 2
 
 Assunto: Cores, Imagens, Rect
 
@@ -105,3 +103,8 @@ textRectObj.center = (200, 150)
 ```bash
 DISPLAYSURF.blit(textSurfaceObj, textRectObj)
 ```
+
+## Exercício 2
+
+- Com base nos recursos já aprendidos do Pygame, vamos construir uma tela de menu principal de um jogo.
+- Utilizem a criativiade para selecionar os recursos visuais e auditivos
