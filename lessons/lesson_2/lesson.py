@@ -34,8 +34,11 @@ textRectObj = textSurfaceObj.get_rect()
 
 textRectObj.center = (200, 150)
 
+bg_main_menu = pygame.transform.scale(
+    pygame.image.load('res/bg_image.png'), (800, 600))
+
 while True:
-    DISPLAYSURF.fill(WHITE)
+    DISPLAYSURF.blit(bg_main_menu, (0, 0))
     DISPLAYSURF.blit(textSurfaceObj, textRectObj)
     for event in pygame.event.get():
         if event.type == QUIT:
