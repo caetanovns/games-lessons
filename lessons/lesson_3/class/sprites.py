@@ -87,6 +87,8 @@ all_sprites_list = pygame.sprite.Group()
 
 all_sprites_list.add(person)
 
+direction = [0,0]
+
 while True:
 
     DISPLAYSURF.fill(WHITE)
@@ -95,39 +97,56 @@ while True:
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
+        
         if event.type == KEYDOWN:
             person.animation = True
             if event.key == K_UP:
                 person.direction = 0
+                direction[1] = -1
                 y = SPEED * -1
             if event.key == K_DOWN:
                 person.direction = 2
+                direction[1] = 1
                 y = SPEED * 1
             if event.key == K_LEFT:
                 person.direction = 1
                 x = SPEED * -1
+                direction[0] += -1
             if event.key == K_RIGHT:
                 person.direction = 3
+                direction[0] += 1
                 x = SPEED * 1
 
         if event.type == KEYUP:
-            person.animation = False
-            person.index = 0
+            #person.animation = False
+            #person.index = 0
             if event.key == K_UP:
                 y = 0
+                direction[1] = 0
             if event.key == K_DOWN:
                 y = 0
+                direction[1] = 0
             if event.key == K_LEFT:
                 x = 0
+                direction[0] = 0
             if event.key == K_RIGHT:
                 x = 0
-
+                direction[0] = 0
+    
+    keys = pygame.key.get_pressed()
+    
+    if not (keys[K_LEFT] or keys[K_RIGHT] or keys[K_UP] or keys[K_DOWN]):
+        person.animation = False
+        person.index = 0
+        
     # rect1.x += x
     # rect1.y += y
-
-    person.rect.x += x
-    person.rect.y += y
-
+    #person.rect.x += x
+    #person.rect.y += y
+    # print(direction)
+    person.rect.move_ip(direction[0], direction[1])
+    
+    # rect1.move_ip(0, 1)
     DISPLAYSURF.blit(cat_img, rect1)
 
     pygame.draw.rect(DISPLAYSURF, RED, rect1, 1)
