@@ -43,8 +43,7 @@ class Person(pygame.sprite.Sprite):
         for i in range(4):
             sprite_row = []
             for j in range(8):
-                img = sprite_sheet.subsurface(
-                    (j * 64, 512 + (i * 64)), (64, 64))
+                img = sprite_sheet.subsurface((j * 64, 512 + (i * 64)), (64, 64))
                 sprite_row.append(img)
             self.sprites.append(sprite_row)
 
