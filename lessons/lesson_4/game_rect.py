@@ -19,7 +19,7 @@ pygame.display.set_caption("Primeiro Jogo")
 x = 0
 y = 0
 
-SPEED = 1
+SPEED = 5
 WIDHT = 50
 
 dtX = SPEED
@@ -31,9 +31,10 @@ BLACK = (0,0,0)
 quadrados = []
 indexOld = None
 
-rect1 = pygame.Rect(100, 100, WIDHT, WIDHT)
+rect1 = pygame.Rect(200, 200, 150, 150)
 
 bg_main_menu = pygame.transform.scale(pygame.image.load('bg_main_menu.png'), (SCREEN_X, SCREEN_Y))
+pedra = pygame.transform.scale(pygame.image.load('pedra.png'), (150, 150))
 scroll = 800
 
 def random_pos():
@@ -54,19 +55,32 @@ def check_bordas(q):
     
     return False
 
-class Quadrado(pygame.Rect):
+class Quadrado(pygame.sprite.Sprite):
 
-    def __init__(self, x, y):
-        super().__init__(x, y, 50, 50)
-
-    SPEED = 5
+    def __init__(self):
+        super().__init__()
+        self.image = pedra.subsurface((50, 60), (50, 28))
+        
+        self.image = pygame.transform.scale(self.image, (self.SIZE, self.SIZE))
+        self.rect = self.image.get_rect()
+        self.rect.x = random.randint(0, SCREEN_X)
+        self.rect.y = random.randint(0, SCREEN_Y)
+    
+    def update(self):
+        self.image = pygame.transform.scale(self.image, (self.SIZE, self.SIZE))
+        pygame.draw.rect(SURFACE, RED, (self.rect.x, self.rect.y, self.SIZE, self.SIZE),1) # QUADRADO
+    
+    SPEED = 1
     dtX = SPEED
     dtY = SPEED
+    SIZE = 60
 
     cor = sorteio_de_cores()
 
+all_sprites_list = pygame.sprite.Group()
+
 for i in range(1):
-    quadrados.append(Quadrado(random.randint(0, SCREEN_X - 50), random.randint(0, SCREEN_Y - 50)))
+    all_sprites_list.add(Quadrado())
 
 while True:
     SCREEN_X, SCREEN_Y = pygame.display.get_surface().get_size()
@@ -98,51 +112,54 @@ while True:
     scroll -= 1
     # print(rect_cat.colliderect(rect2))
     
-    SURFACE.fill(WHITE) # BACKGROUND
+    # SURFACE.fill(WHITE) # BACKGROUND
     SURFACE.blit(bg_main_menu, (scroll - 800, 0))
     SURFACE.blit(bg_main_menu, (scroll, 0))
 
     if scroll <= 0:
         scroll = 800
-            
-    for q in quadrados:
+
+    for q in all_sprites_list:
         # VERIFICA SE BATEU NO LADO DIREITO
-        if (q.x > SCREEN_X - 50):      
-            q.dtX = -SPEED + random.randint(-2,2)
+        if (q.rect.x > SCREEN_X - 50):      
+            q.dtX = -SPEED
+            
         
         # VERIFICA SE BATEU NO LADO ESQUERDO
-        if(q.x < 0):
-            q.dtX = SPEED + random.randint(-2,2)
+        if(q.rect.x < 0):
+            q.dtX = SPEED
 
         # VERIFICAR SE BATEU BAIXO
-        if (q.y > SCREEN_Y - 50):
-            q.dtY = -SPEED + random.randint(-2,2)
+        if (q.rect.y > SCREEN_Y - 50):
+            q.dtY = -SPEED
 
         # VERIFICA SE BATEU CIMA
-        if (q.y < 0):
-            q.dtY = SPEED + random.randint(-2,2)
-
+        if (q.rect.y < 0):
+            q.dtY = SPEED
         # q.cor = sorteio_de_cores() if check_bordas(q) else q.cor
 
-        q.x += q.dtX
-        q.y += q.dtY
+        q.rect.x += q.dtX
+        q.rect.y += q.dtY
 
-        pygame.draw.rect(SURFACE, q.cor, (q.x, q.y, q.width, q.height)) # QUADRADO
+        # pygame.draw.rect(SURFACE, q.cor, (q.x, q.y, q.width, q.height)) # QUADRADO
         
-    rect1.x += x * SPEED * 5
-    rect1.y += y * SPEED * 5
+    #rect1.x += x * SPEED * 5
+    #rect1.y += y * SPEED * 5
     pygame.draw.rect(SURFACE, BLACK, rect1)
     # pygame.draw.rect(SURFACE, RED, rect2)
-    
-    # rect_cat.topleft = (quadrados[0].x, quadrados[0].y)
-    # SURFACE.blit(cat_image, rect_cat)
-    indexAtual = rect1.collidelist(quadrados)
+    # indexAtual = all_sprites_list.collidelist(rect1)
+    indexAtual = rect1.collidelist(all_sprites_list.sprites())
 
     if indexAtual != -1 and indexOld != indexAtual:
-        quadrados[indexAtual].cor = sorteio_de_cores()
+        print("TOCOU")
+        all_sprites_list.sprites()[indexAtual].SIZE /= 2
 
     if indexOld != indexAtual:
         indexOld = indexAtual
 
+    # SURFACE.blit(pedra, (rect1.x, rect1.y))
+    all_sprites_list.update()
+    all_sprites_list.draw(SURFACE)
+    
     pygame.display.update() # DESENHA NA TELA
     CLOCK.tick(FPS)
